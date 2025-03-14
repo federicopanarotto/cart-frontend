@@ -1,0 +1,22 @@
+<div class="d-flex flex-row d-flex justify-content-between align-items-center">
+  <div class="item-name col-9">
+      {{item.name}}
+  </div>
+
+  <div class="d-flex flex-row align-items-center flex-wrap col-3">
+      <span class="ms-2 d-flex flex-row align-items-center">
+          <label class="me-1" for="quantity">qty:</label>
+          <input class="form-control item-quantity" 
+            [ngModel]="item.quantity"
+            (ngModelChange)="quantityChange($event)" 
+            type="number" 
+            name="quantity" 
+            style="width: 70px"
+          >
+      </span>
+      <span class="ms-2 d-flex col-6 justify-content-between">
+          <span class="item-price">{{ getItemPrice(item) | currency }}</span>
+          <span class="item-discount">{{ getDiscountAmount(item) | discountAmount }}</span>
+      </span>
+  </div>
+</div>

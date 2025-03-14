@@ -1,16 +1,24 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { cart } from './utils/cart-data';
+import { getVat } from './utils/cart-utils';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
+  standalone: false,
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'cart-frontend';
+  items = cart;
 
-  changeTitle() {
-    this.title = 'Dio luamaro';
+  vat = getVat('IT');
+
+  updateQuantity(item: any, newQuantity: number) {
+    const index = this.items.indexOf(item);
+    const clone = structuredClone(this.items);
+    clone[index].quantity = newQuantity;
+    
+    this.items = clone;
   }
+  
 }

@@ -1,6 +1,23 @@
-<div>
-  <h1>{{ title }}</h1>
-  <button (click)="changeTitle()">Click me</button>
-</div>
+<div class="container">
+  <div id="items-list-container">
+    <h3>I tuoi articoli</h3>
+    <ul class="list-group" id="items-list">
+      <li class="list-group-item item" *ngFor="let item of items">
+        <app-cart-item 
+          [item]="item" 
+          [vat]="vat" 
+          (quantityChange)="updateQuantity(item, $event)"
+        >
+        </app-cart-item>
+      </li>
+    </ul>
+  </div>
 
-<router-outlet />
+  <div class="mt-5">
+    <h3>Totale ordine</h3>
+    <div class="order-summary">
+      <app-summary [items]="items" [vat]="0.22"></app-summary>
+    </div>
+  </div>
+
+</div>
