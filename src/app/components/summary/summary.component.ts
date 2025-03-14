@@ -1,5 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { calcCartItem, getTransportFee } from '../../utils/cart-utils';
+import { CartItem } from '../../services/cart-item.entity';
 
 @Component({
   selector: 'app-summary',
@@ -10,7 +11,7 @@ import { calcCartItem, getTransportFee } from '../../utils/cart-utils';
 })
 export class SummaryComponent implements OnChanges {
   @Input({required: true})
-  items: any[] = [];
+  items: CartItem[] = [];
   @Input()
   vat: number = 0;
 
@@ -21,6 +22,10 @@ export class SummaryComponent implements OnChanges {
   }
 
   getSummary() {
+    if (!this.items) {
+      return {netTotal: 0, totalVat: 0, totalWeight: 0, totalPrice: 0, transportFee: 0}
+    }
+
     const summary = this.items.reduce((summ, item) => {
       const calculatedCart = calcCartItem(item, this.vat);
       return {
@@ -38,6 +43,5 @@ export class SummaryComponent implements OnChanges {
       transportFee
     }
   }
-
 
 }

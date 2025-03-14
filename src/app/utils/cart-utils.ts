@@ -1,3 +1,5 @@
+import { CartItem } from "../services/cart-item.entity";
+
 function getDiscountPrice(price: number, discount: number) {
   return price * (discount / 100);
 }
@@ -20,10 +22,10 @@ export function getTransportFee(weight: number) {
   return transportFee;
 }
 
-export function calcCartItem(item: any, vat: number) {
-  const discountOnTotal = getDiscountPrice(item.netPrice, item.discount);
-  const vatOnTotal = getVatPrice(item.netPrice - discountOnTotal, vat);
-  const discountedPrice = item.netPrice - discountOnTotal;
+export function calcCartItem(item: CartItem, vat: number) {
+  const discountOnTotal = getDiscountPrice(item.product.netPrice, item.product.discount);
+  const vatOnTotal = getVatPrice(item.product.netPrice - discountOnTotal, vat);
+  const discountedPrice = item.product.netPrice - discountOnTotal;
   const price = discountedPrice + vatOnTotal;
 
   const total = price * item.quantity;
@@ -34,10 +36,6 @@ export function calcCartItem(item: any, vat: number) {
     vatPrice: vatOnTotal * item.quantity,
     netTotalPrice: discountedPrice * item.quantity,
     totalPrice: total,
-    totalWeight: item.weight * item.quantity,
+    totalWeight: item.product.weight * item.quantity,
   };
-}
-
-export function getVat(country: string) {
-  return country === "IT" ? 0.22 : 0;
 }

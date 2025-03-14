@@ -1,6 +1,6 @@
 <div class="d-flex flex-row d-flex justify-content-between align-items-center">
   <div class="item-name col-9">
-      {{item.name}}
+      {{item.product.name}}
   </div>
 
   <div class="d-flex flex-row align-items-center flex-wrap col-3">
@@ -12,6 +12,8 @@
             type="number" 
             name="quantity" 
             style="width: 70px"
+            min="0"
+            step="1"
           >
       </span>
       <span class="ms-2 d-flex col-6 justify-content-between">
