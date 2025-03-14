@@ -21,8 +21,6 @@ protected cartSrv = inject(CartSourceService);
   protected destroyed$ = new Subject<void>();
 
   ngOnInit() {
-    this.vatSrv.setCountry('IT');
-
     // this.cartSrv.items$.pipe(
     //   takeUntil(this.destroyed$)
     // ).subscribe(val => console.log(val))

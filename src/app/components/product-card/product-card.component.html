@@ -3,7 +3,7 @@
     <h5 class="card-title">{{ product.name }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{ price | currency }}{{ discount | discountAmount }}</h6>
     <p class="card-text">{{ product.description }}</p>
-    <a href="#" class="btn btn-link">details</a>
+    <a href="#" class="btn btn-link" (click)="onClickDetails.emit($event)">details</a>
   </div>
   <div class="card-footer text-muted text-end">
     <input 

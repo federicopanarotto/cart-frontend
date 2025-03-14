@@ -17,6 +17,7 @@ import { omitBy, pick } from 'lodash';
 })
 export class ProductsComponent implements OnInit {
   protected productSrv = inject(ProductService);
+  protected cartSrv = inject(CartSourceService);
   protected vatSrv = inject(VatService);
   protected activatedRoute = inject(ActivatedRoute);
   protected router = inject(Router);
@@ -51,8 +52,6 @@ export class ProductsComponent implements OnInit {
     );
     
   ngOnInit() {
-    this.vatSrv.setCountry('IT');
-
     this.updateQueryParams.pipe(
       takeUntil(this.destroyer$),
       debounceTime(300),
@@ -73,7 +72,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(productId: string, quantity: number) {
-    // console.log(productId, quantity);
+    this.cartSrv.addItem(productId, quantity);
   }
 
   trackById(_: number, product: Product) {

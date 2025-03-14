@@ -1,0 +1,9 @@
+#sidebar-checkout {
+    position: sticky;
+    top: 10px;
+}
+
+#list {
+    height: 80vh;
+    overflow-y: scroll;
+}

@@ -15,6 +15,7 @@
             [product]="product"
             [vat]="(vat$ | async) || 0"
             (addItem)="addToCart($event.productId, $event.quantity)"
+            (clickDetails)=""
           ></app-product-card>
         </div>
       </div>
@@ -22,7 +23,7 @@
     </div>
 
     <div class="col side-cart">
-      side cart
+      <app-side-cart></app-side-cart>
     </div>
   </div>
 
