@@ -1,10 +1,10 @@
 import { CartItem } from "../services/cart-item.entity";
 
-function getDiscountPrice(price: number, discount: number) {
+export function getDiscountPrice(price: number, discount: number) {
   return price * (discount / 100);
 }
 
-function getVatPrice(price: number, vat: number) {
+export function getVatPrice(price: number, vat: number) {
   return price * vat;
 }
 

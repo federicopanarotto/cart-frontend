@@ -8,8 +8,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CartSourceService {
-  protected _items$ = new BehaviorSubject<CartItem[]>([]);
   protected http = inject(HttpClient);
+  protected _items$ = new BehaviorSubject<CartItem[]>([]);
 
   items$ = this._items$.asObservable();
 
@@ -18,15 +18,16 @@ export class CartSourceService {
   }
 
   setQuantity(id: string, quantity: number) {
-    const list = this._items$.value;
+    this.http.patch<CartItem>(`/api/cart/${id}`, {quantity: quantity})
+      .subscribe(updated => {
+        const list = this._items$.value;
 
-    const index = list.findIndex(i => i.id === id);
-    const clone = structuredClone(list);
-    clone[index].quantity = quantity;
-
-    
-    
-    this._items$.next(clone);
+        const index = list.findIndex(i => i.id === id);
+        const clone = structuredClone(list);
+        clone[index] = updated;
+        
+        this._items$.next(clone);
+      });
   }
 
   private fetch() {
