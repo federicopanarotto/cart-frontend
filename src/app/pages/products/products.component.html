@@ -4,6 +4,10 @@
 
       <button class="btn btn-secondary" (click)="refresh()">Refresha</button>
 
+      <!-- <app-product-details
+        [product]="pro"
+      ></app-product-details> -->
+
       <app-product-filter
         [filters]="(filters$ | async) || {}"
         (filterChange)="setFilters($event)"
@@ -15,7 +19,6 @@
             [product]="product"
             [vat]="(vat$ | async) || 0"
             (addItem)="addToCart($event.productId, $event.quantity)"
-            (clickDetails)=""
           ></app-product-card>
         </div>
       </div>

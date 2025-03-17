@@ -82,4 +82,5 @@ export class ProductsComponent implements OnInit {
   setFilters(filters: ProductFilter) {
     this.updateQueryParams.next(filters);
   }
+
 }

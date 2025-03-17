@@ -11,5 +11,8 @@ export class ProductDetailsComponent {
   @Input()
   product!: Product;
 
+  toJson() {
+    return JSON.stringify(this.product, null, 4);
+  }
   
 }

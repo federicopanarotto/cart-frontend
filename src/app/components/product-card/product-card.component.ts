@@ -17,8 +17,6 @@ export class ProductCardComponent implements OnChanges {
 
   @Output('addItem')
   onAddItem = new EventEmitter<{productId: string, quantity: number}>();
-  @Output('clickDetails')
-  onClickDetails = new EventEmitter<any>();
 
   quantity: number = 1;
 
@@ -35,4 +33,5 @@ export class ProductCardComponent implements OnChanges {
     this.onAddItem.emit({productId: this.product.id, quantity: this.quantity});
     this.quantity = 1;
   }
+
 }
