@@ -39,10 +39,10 @@ export class CartSourceService {
         const index = list.findIndex(i => i.id === added.id);
         const clone = structuredClone(list);
 
-        if (index > -1) {
-          clone[index] = added;
-        } else {
+        if (index === -1) {
           clone.push(added);
+        } else {
+          clone[index] = added;
         }
         this._items$.next(clone);
       });

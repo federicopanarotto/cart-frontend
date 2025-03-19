@@ -18,6 +18,9 @@ export class ProductCardComponent implements OnChanges {
   @Output('addItem')
   onAddItem = new EventEmitter<{productId: string, quantity: number}>();
 
+  @Output('openDetails')
+  onOpenDetails = new EventEmitter<string>();
+
   quantity: number = 1;
 
   price: number = 0;

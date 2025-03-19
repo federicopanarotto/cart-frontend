@@ -83,4 +83,8 @@ export class ProductsComponent implements OnInit {
     this.updateQueryParams.next(filters);
   }
 
+  routeDetails(productId: string) {
+    this.router.navigate([`/products/${productId}`]);
+  }
+
 }

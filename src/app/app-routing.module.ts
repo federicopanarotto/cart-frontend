@@ -5,24 +5,30 @@ import { ProductsComponent } from './pages/products/products.component';
 import { productFiltersResolver } from './resolvers/product-filters.resolver';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { productDataResolver } from './resolvers/product-data.resolver';
+import { ProductContainerComponent } from './pages/product-container/product-container.component';
 
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
-  { 
-    path: 'products', 
-    component: ProductsComponent,
-    resolve: {
-      filters: productFiltersResolver
-    },
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
-  },
   {
-    path: 'products/details/:id',
-    component: ProductDetailsComponent,
-    // resolve: {
-    //   id: productDataResolver
-    // },
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
+    path: 'products',
+    component: ProductContainerComponent,
+    children: [
+      { 
+        path: '', 
+        component: ProductsComponent,
+        resolve: {
+          filters: productFiltersResolver
+        },
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+      },
+      {
+        path: ':id',
+        component: ProductDetailsComponent,
+        resolve: {
+          data: productDataResolver
+        },
+      },
+    ]
   },
   { path: '', redirectTo: '/products', pathMatch: 'full' }
 ];

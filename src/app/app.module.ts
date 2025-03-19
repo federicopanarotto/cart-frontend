@@ -18,6 +18,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { SideCartComponent } from './components/side-cart/side-cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { ProductContainerComponent } from './pages/product-container/product-container.component';
 registerLocaleData(localeIt);
 
 @NgModule({
@@ -31,7 +32,8 @@ registerLocaleData(localeIt);
     ProductCardComponent,
     ProductFilterComponent,
     SideCartComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProductContainerComponent
   ],
   imports: [
     BrowserModule,

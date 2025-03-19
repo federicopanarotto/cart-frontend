@@ -1,18 +1,24 @@
 <div class="container mt-5">
-  <div id="items-list-container">
-    <h3>I tuoi articoli</h3>
-    <ul class="list-group" id="items-list">
-      <li class="list-group-item item" *ngFor="let item of items$ | async; trackBy: trackById">
-        <app-cart-item 
-          [item]="item" 
-          [vat]="(vat$ | async) || 0" 
-          (quantityChange)="updateQuantity(item, $event)"
-          (removeItem)="removeItem(item)"
-        ></app-cart-item>
-      </li>
-    </ul>
-  </div>
 
+  <div id="items-list-container" *ngIf="(items$ | async) as items">
+    <div *ngIf="items.length > 0 else voidList">
+      <h3>I tuoi articoli</h3>
+      <ul class="list-group" id="items-list">
+        <li class="list-group-item item" *ngFor="let item of items; trackBy: trackById">
+          <app-cart-item 
+            [item]="item" 
+            [vat]="(vat$ | async) || 0" 
+            (quantityChange)="updateQuantity(item, $event)"
+            (removeItem)="removeItem(item)"
+          ></app-cart-item>
+        </li>
+      </ul>
+    </div>
+    <ng-template #voidList>
+      <h3>Il carrello è vuoto</h3>
+    </ng-template>
+  </div>
+  
   <div class="mt-5">
     <h3>Totale ordine</h3>
     <div class="order-summary">

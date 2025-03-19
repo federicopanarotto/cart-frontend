@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Product } from '../../services/product.entity';
 import { combineLatest, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -13,22 +13,23 @@ import { VatService } from '../../services/vat.service';
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent  {
   protected productSrv = inject(ProductService);
   protected cartSrv = inject(CartSourceService);
   protected activatedRoute = inject(ActivatedRoute);
   protected vatSrv = inject(VatService);
 
   vat$ = this.vatSrv.vat$;
-  productData$: Observable<Product> = this.activatedRoute.params
+
+  product$ = this.activatedRoute.data
     .pipe(
-      switchMap(params => this.productSrv.getProduct(params['id']))
+      map(data => data['data'])
     );
 
   quantity = 1;
   
   data$ = combineLatest([
-        this.productData$,
+        this.product$,
         this.vat$
       ]).pipe(
       map(([product, vat]) => {

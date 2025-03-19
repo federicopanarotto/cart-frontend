@@ -20,7 +20,7 @@ export class ProductService {
     return this.http.get<Product[]>('/api/products', {params: q});
   }
 
-  getProduct(productId: string) {
+  getProduct(productId: string | null) {
     return this.http.get<Product>(`api/products/${productId}`);
   }
 

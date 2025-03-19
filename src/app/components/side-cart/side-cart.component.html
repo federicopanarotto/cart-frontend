@@ -1,7 +1,7 @@
 <div id="sidebar-checkout">
   <h3>Cart</h3>
   <p>Total: {{ total$ | async | currency }}</p>
-  <button routerLink="/checkout" class="btn btn-primary mb-3">Checkout</button>
+  <button [routerLink]="['/checkout']" class="btn btn-success mb-3">Checkout</button>
   
   <div id="list" class="mb-3">
     <ul  class="list-group" id="side-items-list">
