@@ -10,6 +10,9 @@ export class DiscountAmountPipe implements PipeTransform {
   constructor (private currency: CurrencyPipe) {}
 
   transform(value: string | number): string {
+    if (value === 0) {
+      return '';
+    }
     const currencyString = this.currency.transform(value);
     return value ? `(-${currencyString})` : '';
   }

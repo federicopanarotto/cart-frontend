@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Product } from '../../services/product.entity';
-import { getDiscountPrice, getVatPrice } from '../../utils/cart-utils';
+import { calcCartItem, getDiscountPrice, getVatPrice } from '../../utils/cart-utils';
 
 @Component({
   selector: 'app-product-card',
@@ -24,9 +24,9 @@ export class ProductCardComponent implements OnChanges {
   discount: number = 0;
 
   ngOnChanges(): void {
-    const p = getVatPrice(this.product.netPrice, this.vat);
-    this.price = this.product.netPrice - getDiscountPrice(this.product.netPrice, this.product.discount);
-    this.discount = p  * this.product.discount
+    const calcs = calcCartItem({id: '', product: this.product, quantity: 1}, this.vat);
+    this.price = calcs.totalPrice;
+    this.discount = calcs.discountPrice
   }
 
   addItem() {

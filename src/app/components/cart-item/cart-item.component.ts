@@ -17,6 +17,9 @@ export class CartItemComponent {
   @Output('quantityChange')
   onQuantityChange = new EventEmitter<number>();
 
+  @Output('removeItem')
+  onRemoveItem = new EventEmitter<string>();
+
   getItemPrice(item: CartItem) {
     const calculated = calcCartItem(item, this.vat);
     return calculated.totalPrice;
@@ -29,5 +32,9 @@ export class CartItemComponent {
 
   quantityChange(value: number) {
     this.onQuantityChange.emit(value);
+  }
+
+  removeItem(itemId: string) {
+    this.onRemoveItem.emit(itemId);
   }
 }

@@ -11,6 +11,6 @@ export class AppComponent implements OnInit {
   vatSrv = inject(VatService);
   
   ngOnInit(): void {
-    this.vatSrv.setCountry('EN');
+    this.vatSrv.setCountry('IT');
   }
 }

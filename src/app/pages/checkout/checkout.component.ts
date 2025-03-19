@@ -47,4 +47,8 @@ protected cartSrv = inject(CartSourceService);
   trackById(_: number, item: CartItem) {
     return item.id;
   }
+
+  removeItem(item: CartItem) {
+    this.cartSrv.removeItem(item.id);
+  }
 }

@@ -4,10 +4,6 @@
 
       <button class="btn btn-secondary" (click)="refresh()">Refresha</button>
 
-      <!-- <app-product-details
-        [product]="pro"
-      ></app-product-details> -->
-
       <app-product-filter
         [filters]="(filters$ | async) || {}"
         (filterChange)="setFilters($event)"

@@ -39,13 +39,23 @@ export class CartSourceService {
         const index = list.findIndex(i => i.id === added.id);
         const clone = structuredClone(list);
 
-        console.log(index, added)
         if (index > -1) {
           clone[index] = added;
         } else {
           clone.push(added);
         }
-        console.log(clone)
+        this._items$.next(clone);
+      });
+  }
+
+  removeItem(id: string) {
+    this.http.delete<CartItem>(`/api/cart/${id}`)
+      .subscribe(removed => {
+        const list = this._items$.value;
+
+        // const index = list.findIndex(i => i.id === removed.id);
+        const clone = structuredClone(list).filter(item => item.id !== removed.id);
+
         this._items$.next(clone);
       });
   }

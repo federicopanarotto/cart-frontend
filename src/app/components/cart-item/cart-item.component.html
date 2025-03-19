@@ -20,5 +20,6 @@
           <span class="item-price">{{ getItemPrice(item) | currency }}</span>
           <span class="item-discount">{{ getDiscountAmount(item) | discountAmount }}</span>
       </span>
+      <button class="ms-2 btn btn-danger" (click)="removeItem(item.id)">Remove</button>
   </div>
 </div>

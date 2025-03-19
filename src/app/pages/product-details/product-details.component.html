@@ -1,0 +1,30 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+
+    <div class="col">
+      <div class="card" *ngIf="data$ | async as data">
+        <div class="card-body">
+          <h2>{{ data.product.name }}</h2>
+          <hr>
+          <p>{{ data.product.description }}</p>
+          <p>Price: {{ data.totalPrice | currency }} {{ data.discountPrice | discountAmount }}</p>
+          <p>Weight: {{ data.product.weight }}</p>
+        </div>
+        <div class="card-footer text-muted text-end">
+          <input 
+            type="number" 
+            value="1" 
+            class="product-card-quantity" 
+            [(ngModel)]="quantity" 
+          >
+          <button class="btn btn-link" (click)="addToCart(data.product.id, quantity)">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col side-cart">
+      <app-side-cart></app-side-cart>
+    </div>
+    
+  </div>
+</div>

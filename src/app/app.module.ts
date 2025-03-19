@@ -17,7 +17,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { SideCartComponent } from './components/side-cart/side-cart.component';
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 registerLocaleData(localeIt);
 
 @NgModule({

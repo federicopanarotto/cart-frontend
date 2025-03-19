@@ -10,6 +10,7 @@
           [item]="item"
           [vat]="(vat$ | async) || 0"
           (quantityChange)="updateQuantity(item, $event)"
+          (removeItem)="removeItem(item)"
         ></app-cart-item>
       </li>
     </ul>

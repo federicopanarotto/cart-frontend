@@ -67,4 +67,8 @@ export class SideCartComponent implements OnInit, OnDestroy {
   updateQuantity(item: CartItem, newQuantity: number) {
     this.updateQtySubject$.next({ id: item.id, quantity: newQuantity });
   }
+
+  removeItem(item: CartItem) {
+    this.cartSrv.removeItem(item.id);
+  }
 }

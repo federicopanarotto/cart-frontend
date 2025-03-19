@@ -1,6 +1,7 @@
 import { ResolveFn } from '@angular/router';
 import { ProductFilter } from '../services/product.service';
 import { pick } from 'lodash';
+import { inject } from '@angular/core';
 
 export const productFiltersResolver: ResolveFn<ProductFilter> = (route, state) => {
   const params = route.queryParams;

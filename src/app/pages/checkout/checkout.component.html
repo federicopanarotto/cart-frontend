@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
   <div id="items-list-container">
     <h3>I tuoi articoli</h3>
     <ul class="list-group" id="items-list">
@@ -7,6 +7,7 @@
           [item]="item" 
           [vat]="(vat$ | async) || 0" 
           (quantityChange)="updateQuantity(item, $event)"
+          (removeItem)="removeItem(item)"
         ></app-cart-item>
       </li>
     </ul>

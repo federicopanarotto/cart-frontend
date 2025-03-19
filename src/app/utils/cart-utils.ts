@@ -1,7 +1,7 @@
 import { CartItem } from "../services/cart-item.entity";
 
 export function getDiscountPrice(price: number, discount: number) {
-  return price * (discount / 100);
+  return price * discount;
 }
 
 export function getVatPrice(price: number, vat: number) {
