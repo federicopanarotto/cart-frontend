@@ -6,8 +6,12 @@ import { productFiltersResolver } from './resolvers/product-filters.resolver';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { productDataResolver } from './resolvers/product-data.resolver';
 import { ProductContainerComponent } from './pages/product-container/product-container.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
   { path: 'checkout', component: CheckoutComponent },
   {
     path: 'products',

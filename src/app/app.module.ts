@@ -11,7 +11,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import localeIt from '@angular/common/locales/it';
 import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import { DiscountAmountPipe } from './pipes/discount-amount.pipe';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
@@ -19,6 +19,9 @@ import { ProductFilterComponent } from './components/product-filter/product-filt
 import { SideCartComponent } from './components/side-cart/side-cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { ProductContainerComponent } from './pages/product-container/product-container.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { authInterceptor } from './utils/auth.interceptor';
 registerLocaleData(localeIt);
 
 @NgModule({
@@ -33,7 +36,9 @@ registerLocaleData(localeIt);
     ProductFilterComponent,
     SideCartComponent,
     ProductDetailsComponent,
-    ProductContainerComponent
+    ProductContainerComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,8 @@ registerLocaleData(localeIt);
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR'},
     { provide: LOCALE_ID, useValue: 'it-IT' },
     CurrencyPipe,
-    provideHttpClient()
+    provideHttpClient(
+      withInterceptors([authInterceptor]))
   ],
   bootstrap: [AppComponent]
 })
