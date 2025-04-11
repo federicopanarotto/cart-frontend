@@ -5,7 +5,7 @@
     <p class="card-text">{{ product.description }}</p>
     <a (click)="onOpenDetails.emit(product.id)" class="btn btn-link">details</a>
   </div>
-  <div class="card-footer text-muted text-end">
+  <div class="card-footer text-muted text-end" *ifAuthenticated>
     <input 
       type="number" 
       value="1" 

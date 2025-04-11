@@ -8,11 +8,12 @@ import { productDataResolver } from './resolvers/product-data.resolver';
 import { ProductContainerComponent } from './pages/product-container/product-container.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { authGuard } from './utils/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'checkout', component: CheckoutComponent },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
   {
     path: 'products',
     component: ProductContainerComponent,

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductFilter, ProductService } from '../../services/product.service';
-import { Product } from '../../services/product.entity';
+import { Product } from '../../services/entities/product.entity';
 import { VatService } from '../../services/vat.service';
 import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { CartSourceService } from '../../services/cart-source.service';

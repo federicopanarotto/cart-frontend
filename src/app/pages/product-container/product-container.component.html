@@ -5,7 +5,7 @@
       <router-outlet></router-outlet>
     </div>
 
-    <div class="col side-cart">
+    <div class="col side-cart" *ifAuthenticated>
       <app-side-cart></app-side-cart>
     </div>
     

@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CartSourceService } from '../../services/cart-source.service';
-import { CartItem } from '../../services/cart-item.entity';
+import { CartItem } from '../../services/entities/cart-item.entity';
 import { VatService } from '../../services/vat.service';
 import { combineLatest, debounceTime, map, Subject, takeUntil } from 'rxjs';
 import { calcCartItem } from '../../utils/cart-utils';
@@ -59,6 +59,12 @@ export class SideCartComponent implements OnInit, OnDestroy {
       });
   }
 
+  getItemPrice(item: CartItem, vat: number) {
+    const calculated = calcCartItem(item, vat);
+    return calculated.totalPrice;
+  }
+
+
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
@@ -68,7 +74,7 @@ export class SideCartComponent implements OnInit, OnDestroy {
     this.updateQtySubject$.next({ id: item.id, quantity: newQuantity });
   }
 
-  removeItem(item: CartItem) {
-    this.cartSrv.removeItem(item.id);
+  remove(id: string) {
+    this.cartSrv.removeItem(id);
   }
 }

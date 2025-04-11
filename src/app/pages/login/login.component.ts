@@ -1,9 +1,8 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { catchError, Subject, takeUntil, tap, throwError } from 'rxjs';
+import { catchError, map, Subject, takeUntil, tap, throwError } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { JwtService } from '../../services/jwt.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   protected fb = inject(FormBuilder);
   protected authSrv = inject(AuthService);
   protected router = inject(Router);
+  protected activatedRoute = inject(ActivatedRoute);
   
   protected destroyer$ = new Subject<void>()
 
@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginError = '';
 
+  requestedUrl: string | null = null;
+
   ngOnInit(): void {
     this.loginForm.valueChanges
       .pipe(
@@ -32,7 +34,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.loginError = '';
-      })
+      });
+
+    this.activatedRoute.queryParams
+      .pipe(
+        takeUntil(this.destroyer$),
+        map(params => params['requestedUrl'])
+      )
+      .subscribe(url => {
+        this.requestedUrl = url;
+      });
   }
 
   ngOnDestroy(): void {
@@ -53,7 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe(() => {
-          this.router.navigate(['/'])
+          this.router.navigate([this.requestedUrl ? this.requestedUrl : '/']);
         });
     }
   }

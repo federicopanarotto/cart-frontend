@@ -1,5 +1,5 @@
 import { RedirectCommand, ResolveFn, Router } from '@angular/router';
-import { Product } from '../services/product.entity';
+import { Product } from '../services/entities/product.entity';
 import { inject } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { catchError, of } from 'rxjs';

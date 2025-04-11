@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { VatService } from './services/vat.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { VatService } from './services/vat.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  vatSrv = inject(VatService);
+  protected vatSrv = inject(VatService);
   
   ngOnInit(): void {
     this.vatSrv.setCountry('IT');

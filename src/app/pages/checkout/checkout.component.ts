@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Subject, takeUntil, debounceTime } from 'rxjs';
-import { CartItem } from '../../services/cart-item.entity';
+import { CartItem } from '../../services/entities/cart-item.entity';
 import { CartSourceService } from '../../services/cart-source.service';
 import { VatService } from '../../services/vat.service';
 

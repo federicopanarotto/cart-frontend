@@ -2,17 +2,17 @@
   <h3>Cart</h3>
   <p>Total: {{ total$ | async | currency }}</p>
   <button [routerLink]="['/checkout']" class="btn btn-success mb-3">Checkout</button>
-  
-  <div id="list" class="mb-3">
-    <ul  class="list-group" id="side-items-list">
-      <li class="list-group-item item" *ngFor="let item of items$ | async; trackBy: trackById">
-        <app-cart-item
-          [item]="item"
-          [vat]="(vat$ | async) || 0"
-          (quantityChange)="updateQuantity(item, $event)"
-          (removeItem)="removeItem(item)"
-        ></app-cart-item>
-      </li>
-    </ul>
+
+  <div class="list-group">
+    <a class="list-group-item" *ngFor="let item of items$ | async">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{item.product.name}}</h5>
+        <small>x{{item.quantity}}</small>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <small>{{ getItemPrice(item, (vat$ | async)!) | currency}}</small>
+        <button class="btn btn-link" (click)="remove(item.id)">remove</button>
+      </div>
+    </a>
   </div>
 </div>

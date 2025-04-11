@@ -1,4 +1,4 @@
-import { CartItem } from "../services/cart-item.entity";
+import { CartItem } from "../services/entities/cart-item.entity";
 
 export function getDiscountPrice(price: number, discount: number) {
   return price * discount;

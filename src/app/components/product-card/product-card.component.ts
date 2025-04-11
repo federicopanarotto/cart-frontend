@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { Product } from '../../services/product.entity';
+import { Product } from '../../services/entities/product.entity';
 import { calcCartItem, getDiscountPrice, getVatPrice } from '../../utils/cart-utils';
 
 @Component({

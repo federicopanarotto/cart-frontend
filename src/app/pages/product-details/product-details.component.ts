@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { Product } from '../../services/product.entity';
+import { Product } from '../../services/entities/product.entity';
 import { combineLatest, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';

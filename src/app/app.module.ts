@@ -22,6 +22,9 @@ import { ProductContainerComponent } from './pages/product-container/product-con
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { authInterceptor } from './utils/auth.interceptor';
+import { logoutInterceptor } from './utils/logout.interceptor';
+import { IfAuthenticatedDirective } from './utils/if-authenticated.directive';
+import { NavbarComponent } from './components/navbar/navbar.component';
 registerLocaleData(localeIt);
 
 @NgModule({
@@ -38,7 +41,9 @@ registerLocaleData(localeIt);
     ProductDetailsComponent,
     ProductContainerComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    IfAuthenticatedDirective,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,7 @@ registerLocaleData(localeIt);
     { provide: LOCALE_ID, useValue: 'it-IT' },
     CurrencyPipe,
     provideHttpClient(
+      // withInterceptors([authInterceptor, logoutInterceptor]))
       withInterceptors([authInterceptor]))
   ],
   bootstrap: [AppComponent]

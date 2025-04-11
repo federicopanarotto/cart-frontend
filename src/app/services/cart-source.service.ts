@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { cart } from '../utils/cart-data';
 import { BehaviorSubject } from 'rxjs';
-import { CartItem } from './cart-item.entity';
+import { CartItem } from './entities/cart-item.entity';
 import { HttpClient } from '@angular/common/http';
 import { add } from 'lodash';
 

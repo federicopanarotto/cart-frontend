@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Product } from './product.entity';
+import { Product } from './entities/product.entity';
 import { isNil, omitBy } from 'lodash';
 
 export type ProductFilter = {

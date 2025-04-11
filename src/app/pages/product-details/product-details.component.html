@@ -8,7 +8,7 @@
       <p>Price: {{ data.totalPrice | currency }} {{ data.discountPrice | discountAmount }}</p>
       <p>Weight: {{ data.product.weight }}</p>
     </div>
-    <div class="card-footer text-muted text-end">
+    <div class="card-footer text-muted text-end" *ifAuthenticated>
       <input 
         type="number" 
         value="1" 

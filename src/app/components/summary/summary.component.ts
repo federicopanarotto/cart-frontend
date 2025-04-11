@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { calcCartItem, getTransportFee } from '../../utils/cart-utils';
-import { CartItem } from '../../services/cart-item.entity';
+import { CartItem } from '../../services/entities/cart-item.entity';
 
 @Component({
   selector: 'app-summary',
