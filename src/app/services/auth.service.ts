@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, distinctUntilChanged, map, of, ReplaySubject, takeUntil, tap } from 'rxjs';
+import { catchError, distinctUntilChanged, map, of, ReplaySubject, tap } from 'rxjs';
 import { JwtService } from './jwt.service';
 import { User } from './entities/user.entity';
 import { Router } from '@angular/router';
@@ -18,23 +18,21 @@ export class AuthService {
 
   isAuthenticated$ = this.currentUser$
     .pipe(
-      map(_ => this.isLoggedIn()),
+      map(user => !!user),
       distinctUntilChanged()
     );
 
   login(username: string, password: string) {
     return this.http.post<any>(`/api/login`, {username, password}).pipe(
-      tap((res) => this.jwtSrv.setToken(res.token)),
+      tap((res) => this.jwtSrv.setToken(res.token, res.refreshToken)),
       tap((res) => this._currentUser$.next(res.user)),
-      map((res) => {
-        console.log(res);
-        return res.user
-      })
+      map((res) => res.user)
     );
   }
 
   constructor() {
-    this.fetchUser().subscribe();
+    this._currentUser$.next(this.jwtSrv.getPayload())
+    console.log('auth');
   }
 
   logout() {
@@ -46,9 +44,11 @@ export class AuthService {
     return this.http.get<User>(`/api/users/me`)
       .pipe(
         catchError(_ => {
+          console.log(_)
           return of(null);
         }),
-        tap(user => this._currentUser$.next(user))
+        tap(user => this._currentUser$.next(user)),
+        tap(user => {console.log(user)}),
       );
   }
 
@@ -56,7 +56,13 @@ export class AuthService {
     return this.http.post(`/api/register`, {firstName, lastName, picture, username, password})
   }
 
-  isLoggedIn() {
-    return this.jwtSrv.hasToken();
+  refreshTokens() {
+    return this.http.post<{token: string, refreshToken: string}>('/api/refreshToken', {refreshToken: this.jwtSrv.getToken('authRefreshToken')})
+      .pipe(
+        tap(({token, refreshToken}) => {
+          this.jwtSrv.setToken(token, refreshToken);
+          this._currentUser$.next(this.jwtSrv.getPayload())
+        })
+      )
   }
 }

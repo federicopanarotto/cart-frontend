@@ -14,9 +14,8 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
   protected destroyer$ = new Subject<void>();
 
   private elseTemplateRef: TemplateRef<any> | null = null;
-  private hasView = false;
 
-  @Input('ifAuthenticatedElse')
+  @Input()
   set ifAuthenticatedElse(templateRef: TemplateRef<any> | null) {
     this.elseTemplateRef = templateRef;
   }
@@ -24,17 +23,15 @@ export class IfAuthenticatedDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authSrv.isAuthenticated$
       .pipe(
-        takeUntil(this.destroyer$)
+        takeUntil(this.destroyer$),
+        distinctUntilChanged()
       )
       .subscribe(isAuthenticated => {
+        this.viewContainer.clear();
         if (isAuthenticated) {
           this.viewContainer.createEmbeddedView(this.templateRef);
-          this.hasView = true;
         } else if (this.elseTemplateRef) {
           this.viewContainer.createEmbeddedView(this.elseTemplateRef);
-          this.hasView = true;
-        } else {
-          this.hasView = false;
         }
       });
   }

@@ -1,15 +1,31 @@
 <div class="container-fluid nav px-3 bg-primary d-flex justify-content-between align-items-center">
   <a routerLink="/" class="text-white"><h1>ITS Amazon</h1></a>
   
-  <button *ngIf="!(authSrv.isAuthenticated$ | async); else: authenticated"
+  <ng-template ifAuthenticated [ifAuthenticatedElse]="login">
+    <div class="row">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button type="button" class="btn btn-light me-2" ngbDropdownToggle>
+            <img [src]="(currentUser$ | async)?.picture" width="30px">
+            {{(currentUser$ | async)?.fullName }}
+          </button>
+          <div ngbDropdownMenu>
+            <button
+              ngbDropdownItem
+              class="btn btn-danger"
+              [routerLink]="'/login'"
+              (click)="logout()"
+            >Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #login>
+    <button
     class="btn btn-secondary"
     [routerLink]="'/login'"
     >Login</button>
-  <ng-template #authenticated>
-    <button
-      class="btn btn-danger"
-      [routerLink]="'/login'"
-      (click)="logout()"
-    >Logout</button>
   </ng-template>
+
 </div>

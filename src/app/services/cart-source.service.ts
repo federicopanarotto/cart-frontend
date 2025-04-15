@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { cart } from '../utils/cart-data';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CartItem } from './entities/cart-item.entity';
 import { HttpClient } from '@angular/common/http';
 import { add } from 'lodash';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,16 @@ import { add } from 'lodash';
 export class CartSourceService {
   protected http = inject(HttpClient);
   protected _items$ = new BehaviorSubject<CartItem[]>([]);
+  protected authSrv = inject(AuthService);
 
   items$ = this._items$.asObservable();
 
   constructor() {
-    this.fetch();
+    this.authSrv.isAuthenticated$.subscribe(val => {
+      if (val) {
+        this.fetch();
+      }
+    })
   }
 
   setQuantity(id: string, quantity: number) {

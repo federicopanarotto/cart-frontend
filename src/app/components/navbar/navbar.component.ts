@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent {
   protected authSrv = inject(AuthService);
+
+  currentUser$ = this.authSrv.currentUser$;
 
   logout() {
     this.authSrv.logout();

@@ -9,9 +9,9 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { SummaryComponent } from './components/summary/summary.component';
 
 import localeIt from '@angular/common/locales/it';
-import { CurrencyPipe, registerLocaleData } from '@angular/common';
+import { CommonModule, CurrencyPipe, registerLocaleData } from '@angular/common';
 import { DiscountAmountPipe } from './pipes/discount-amount.pipe';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
@@ -50,15 +50,16 @@ registerLocaleData(localeIt);
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
   ],
   providers: [
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR'},
     { provide: LOCALE_ID, useValue: 'it-IT' },
     CurrencyPipe,
     provideHttpClient(
-      // withInterceptors([authInterceptor, logoutInterceptor]))
-      withInterceptors([authInterceptor]))
+      withInterceptors([authInterceptor, logoutInterceptor])
+    )
   ],
   bootstrap: [AppComponent]
 })
